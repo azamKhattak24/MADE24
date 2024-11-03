@@ -15,16 +15,12 @@ pipeline TreesPipeline {
     block TreesCSVInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
-
-    //     publish constraint IPv4Format oftype RegexConstraint {
-    //    regex: /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/;
-    //  }
-
+    constraint Xyz on text: value == "Vogelsang";
     block TreesTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
             "lfd_nr" oftype integer,
-            "stadtteil" oftype text,
+            "stadtteil" oftype TreesSelected,
             "standort" oftype text,
             "baumart_botanisch" oftype text,
             "id" oftype text,
@@ -37,3 +33,12 @@ pipeline TreesPipeline {
         file: "./trees.sqlite";
     }
 } 
+
+valuetype TreesSelected oftype text {
+    // 10. Value types can be further refined by providing constraints.
+    constraints: [
+        OnlyVogelsang
+    ];
+}
+
+constraint OnlyVogelsang on text: value == "Vogelsang" or value == "Vogelsang Bols-Siedlung";
