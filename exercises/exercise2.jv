@@ -15,7 +15,6 @@ pipeline TreesPipeline {
     block TreesCSVInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
-    constraint Xyz on text: value == "Vogelsang";
     block TreesTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
@@ -23,7 +22,7 @@ pipeline TreesPipeline {
             "stadtteil" oftype TreesSelected,
             "standort" oftype text,
             "baumart_botanisch" oftype text,
-            "id" oftype text,
+            "id" oftype IdsSelected,
             "baumfamilie" oftype text,
         ];
     }
@@ -33,12 +32,28 @@ pipeline TreesPipeline {
         file: "./trees.sqlite";
     }
 } 
+// The pipeline is set up, every block is performing their task.
 
+// Now adding User defined valueTypes 
 valuetype TreesSelected oftype text {
-    // 10. Value types can be further refined by providing constraints.
     constraints: [
         OnlyVogelsang
     ];
 }
 
+valuetype IdsSelected oftype text {
+    constraints: [
+        validRegex
+    ];
+}
+
+// The user defined valueTypes are defined and can be used as column type in TableInterpreter
+// But the valueTypes still need to have constraints
+
 constraint OnlyVogelsang on text: value == "Vogelsang" or value == "Vogelsang Bols-Siedlung";
+constraint validRegex oftype RegexConstraint {
+    regex: /^\d{1,3}\.\d+,\s*\d{1,3}\.\d+$/;
+}
+
+// These are the constraints asked to full file in exercise sheet.
+
