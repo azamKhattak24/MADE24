@@ -50,10 +50,21 @@ valuetype IdsSelected oftype text {
 // The user defined valueTypes are defined and can be used as column type in TableInterpreter
 // But the valueTypes still need to have constraints
 
-constraint OnlyVogelsang on text: value == "Vogelsang" or value == "Vogelsang Bols-Siedlung";
+constraint OnlyVogelsang on text: value matches /^Vogelsang*/;
 constraint validRegex oftype RegexConstraint {
     regex: /^\d{1,3}\.\d+,\s*\d{1,3}\.\d+$/;
 }
 
 // These are the constraints asked to full file in exercise sheet.
 
+// valuetype good oftype text {
+//     constraints: [
+//         OnlyGood
+//     ];
+// }
+
+// constraint OnlyGood on text: value == "Niederdonker Weg";
+
+// App nae valueType define ki and ye define kiye wo kon kon sae constraints lae raha hai.
+
+// Neecahae app nae ye define kiya kae wo constraints kya kya hain.
