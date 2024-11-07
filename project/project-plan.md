@@ -4,7 +4,7 @@
 <!-- Give your project a short title. -->
 Correlation between Amazon deforestation, Forest fires and CO2 emissions in Brazil.
 
-<img src="project\pictures\Project_Image.webp" width="800" height="466">
+<img src="pictures\Project_Image.webp" width="800" height="466">
 
 ## Main Question
 
