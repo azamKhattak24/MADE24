@@ -44,7 +44,9 @@ The dataset provides monthly emissions(Tons) data from 2002 to 2023, categorized
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 1. Define Problem Statement and Objectives [#1]
+2. Identify and Collect Data [#2]
 
 
 [#1]: https://github.com/azamKhattak24/demo/issues/1#issue-2640775426
+[#2}: https://github.com/azamKhattak24/demo/issues/2#issue-2640799576
 
