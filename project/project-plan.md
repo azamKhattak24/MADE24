@@ -2,7 +2,7 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Correlation between Amazon Deforesation, Forest fires and CO2 emssions in Brazil.
+Correlation between Amazon deforestation, Forest fires and CO2 emissions in Brazil.
 
 ## Main Question
 
@@ -12,7 +12,7 @@ Correlation between Amazon Deforesation, Forest fires and CO2 emssions in Brazil
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-Amazon deforestation is an important issue due to its significant impact on global climate change and biodiversity loss. This project analyzes the correlation between deforestation, forest fires, and CO₂ emissions in Brazil, using statistical analysis and data visualization techniques. The results may provide insights into the broader environmental consequences of deforestation and inform strategies for forest conservation and climate mitigation.
+The Amazon rainforest, the largest on Earth and often referred to as the planet’s lungs, plays a crucial role in regulating global carbon dioxide levels. However, over time, extensive deforestation has severely disrupted its ecosystem, making it increasingly susceptible to forest fires. These fires not only devastate the forest but also contribute significantly to CO₂ emissions. This project explores the correlation between deforestation, forest fires, and CO₂ emissions in Brazil (states that come under the Amazon rainforest Basin), employing statistical analysis and data visualization techniques. 
 
 ## Datasources
 
@@ -43,7 +43,5 @@ The dataset provides monthly emissions(Tons) data from 2002 to 2023, categorized
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
-
-[i1]: https://github.com/jvalue/made-template/issues/1
+1. Define Problem Statement and Objectives #1
+2. Identify and Collect Data #2
