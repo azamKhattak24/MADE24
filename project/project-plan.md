@@ -2,7 +2,7 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Correlation between Amazon deforestation, Forest fires and CO2 emissions in Brazil.
+Correlation between Amazon deforestation, Forest fires and CO₂ emissions in Brazil.
 
 <img src="pictures\Project_Image.webp" width="800" height="466">
 
@@ -34,7 +34,7 @@ Deforestation area (km²) by year and state, from 2004 to 2019. The data is publ
 
 The dataset provides monthly burned area(ha) data from 2002 to 2023, categorized by landcover classes, for all countries and states within those countries. It includes information on forest fires in the Amazon (Brazil) which can be extracted to make a correlation with deforestation and fire outbreaks.
 
-### Datasource3: CO2 emissions in Brazil (Amazon Forest)
+### Datasource3: CO₂ emissions in Brazil (Amazon Forest)
 * Metadata URL: https://gwis.jrc.ec.europa.eu/apps/country.profile/charts/emi
 * Data URL: https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/emission_gfed_full_2002_2023.zip
 * Data Type: Zipped CSV
