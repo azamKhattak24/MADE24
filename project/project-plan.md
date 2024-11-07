@@ -48,5 +48,5 @@ The dataset provides monthly emissions(Tons) data from 2002 to 2023, categorized
 
 
 [#1]: https://github.com/azamKhattak24/demo/issues/1#issue-2640775426
-[#2}: https://github.com/azamKhattak24/demo/issues/2#issue-2640799576
+[#2]: https://github.com/azamKhattak24/demo/issues/2#issue-2640799576
 
