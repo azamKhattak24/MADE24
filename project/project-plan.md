@@ -18,12 +18,26 @@ Amazon deforestation is an important issue due to its significant impact on glob
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+### Datasource1: Deforestation in Amazon
+* Metadata URL: https://www.kaggle.com/datasets/mbogernetto/brazilian-amazon-rainforest-degradation
+* Data URL: https://www.kaggle.com/api/v1/datasets/download/mbogernetto/brazilian-amazon-rainforest-degradation
 * Data Type: CSV
 
-Short description of the DataSource.
+Deforestation area (km²) by year and state, from 2004 to 2019. The data is public on the INPE website. It was already aggregated, so, no data process was made. Program: PRODES (Programa de Monitoramento da Floresta Amazônica Brasileira por Satélite, or Brazilian Amazon Rainforest Monitoring Program by Satellite). Methodology: maps primary forest loss using satellite imagery, with 20 to 30 meters of spatial resolution and 16-day revisit rate, in a combination that seeks to minimize the problem of cloud cover and ensure interoperability criteria.
+
+### Datasource2: Fires in Brazil (Amazon Forest)
+* Metadata URL: https://gwis.jrc.ec.europa.eu/apps/country.profile/charts/ba
+* Data URL: https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/MCD64A1_burned_area_full_dataset_2002-2023.zip
+* Data Type: Zipped CSV
+
+The dataset provides monthly burned area(ha) data from 2002 to 2023, categorized by landcover classes, for all countries and states within those countries. It includes information on forest fires in the Amazon (Brazil) which can be extracted to make a correlation with deforestation and fire outbreaks.
+
+### Datasource3: CO2 emissions in Brazil (Amazon Forest)
+* Metadata URL: https://gwis.jrc.ec.europa.eu/apps/country.profile/charts/emi
+* Data URL: https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/emission_gfed_full_2002_2023.zip
+* Data Type: Zipped CSV
+
+The dataset provides monthly emissions(Tons) data from 2002 to 2023, categorized by pollutant and covering all countries including Brazil.
 
 ## Work Packages
 
