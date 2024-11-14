@@ -1,3 +1,3 @@
 #!/bin/bash
-# Define Kaggle credentials in pipeline.py to be found in kaggle.JSON on line 262
+# Define Kaggle credentials in pipeline.py line 262 & 263 (Kaggle.JSON)
 python3 project/pipeline.py
