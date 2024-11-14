@@ -259,8 +259,8 @@ def main():
         - Save the transformed data to a SQLite database.
     """
 #   Define Kaggle credentials to be found in kaggle.JSON
-    username = "azamkhattak"
-    key = "3932ac8e3dca141cad0d6841bd395cc8"
+    username = "username"
+    key = "key"
 #     kaggle_extract_Data(username, key)
     deforestration_df = kaggle_extract_Data(username, key)
     
