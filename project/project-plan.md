@@ -47,8 +47,12 @@ The dataset provides monthly emissions(Tons) data from 2002 to 2023, categorized
 
 1. Define Problem Statement and Objectives [#1]
 2. Identify and Collect Data [#2]
+3. Data Loading, Cleaning and Preprocessing [#3]
+4. Automate the Data Pipeline (ETL) [#4]
 
 
 [#1]: https://github.com/azamKhattak24/MADE24/issues/1#issue-2650388072
 [#2]: https://github.com/azamKhattak24/MADE24/issues/2#issue-2650389806
+[#3]: https://github.com/azamKhattak24/MADE24/issues/3#issue-2658580619
+[#4]: https://github.com/azamKhattak24/MADE24/issues/4#issue-2658593120
 
