@@ -3,14 +3,14 @@ pipeline CountryStatsPipeline {
     CountryStatsExtractor
         -> CountryStatsXLXSInterpreter
         -> CountryStatsSheetPicker
-        -> CountryStatsDataSelector
+        -> CountryStatsDataSelector;
+
+    CountryStatsDataSelector
         -> CountryStatsColumnDeleter
         -> CountryStatsCellsTableInterpreter
         -> CountryStatsCellsLoader;
 
-    CountryStatsXLXSInterpreter
-        -> SecondCountryStatsSheetPicker
-        -> SecondCountryStatsDataSelector
+    CountryStatsDataSelector
         -> SecondCountryStatsColumnDeleter
         -> SecondCountryStatsCellsTableInterpreter
         -> SecondCountryStatsCellsLoader;
@@ -41,7 +41,7 @@ pipeline CountryStatsPipeline {
         header: false;
         columns: [
             "Country Code" oftype CountryCodeAlpha3,
-            "Bound Issuance Share" oftype BIS
+            "Bond Issuance Share" oftype BIS
         ];
     }
 
@@ -50,13 +50,13 @@ pipeline CountryStatsPipeline {
         file: "./country-stats.sqlite";
     }
 
-    block SecondCountryStatsSheetPicker oftype SheetPicker {
-        sheetName: "Figure S5.1.2";
-    }
+    // block SecondCountryStatsSheetPicker oftype SheetPicker {
+    //     sheetName: "Figure S5.1.2";
+    // }
 
-    block SecondCountryStatsDataSelector oftype CellRangeSelector {
-        select: range P2:S45;
-    }
+    // block SecondCountryStatsDataSelector oftype CellRangeSelector {
+    //     select: range P2:S45;
+    // }
 
     block SecondCountryStatsColumnDeleter oftype ColumnDeleter {
         delete: [ column B, column D
