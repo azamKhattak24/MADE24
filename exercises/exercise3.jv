@@ -3,14 +3,15 @@ pipeline CountryStatsPipeline {
     CountryStatsExtractor
         -> CountryStatsXLXSInterpreter
         -> CountryStatsSheetPicker
-        -> CountryStatsDataSelector
-        -> CountryStateNameHeaderWriter;
+        -> CountryStatsDataSelector;
 
-    CountryStateNameHeaderWriter
+    CountryStatsDataSelector
+        -> CountryStatsColumnDeleter
         -> CountryStatsCellsTableInterpreter
         -> CountryStatsCellsLoader;
 
-    CountryStateNameHeaderWriter
+    CountryStatsDataSelector
+        -> SecondCountryStatsColumnDeleter
         -> SecondCountryStatsCellsTableInterpreter
         -> SecondCountryStatsCellsLoader;
 
@@ -31,18 +32,13 @@ pipeline CountryStatsPipeline {
     }
 
 
-    block CountryStateNameHeaderWriter oftype CellWriter {
-        at: range A1:D1;
-        write: [
-            "Country Code",
-            "Economy",
-            "GDP per Capita",
-            "Bond Issuance Share"
+    block CountryStatsColumnDeleter oftype ColumnDeleter {
+        delete: [ column B, column C
         ];
     }
 
     block CountryStatsCellsTableInterpreter oftype TableInterpreter {
-        header: true;
+        header: false;
         columns: [
             "Country Code" oftype CountryCodeAlpha3,
             "Bond Issuance Share" oftype BIS
@@ -54,9 +50,21 @@ pipeline CountryStatsPipeline {
         file: "./country-stats.sqlite";
     }
 
+    // block SecondCountryStatsSheetPicker oftype SheetPicker {
+    //     sheetName: "Figure S5.1.2";
+    // }
+
+    // block SecondCountryStatsDataSelector oftype CellRangeSelector {
+    //     select: range P2:S45;
+    // }
+
+    block SecondCountryStatsColumnDeleter oftype ColumnDeleter {
+        delete: [ column B, column D
+        ];
+    }
 
     block SecondCountryStatsCellsTableInterpreter oftype TableInterpreter {
-        header: true;
+        header: false;
         columns: [
             "Country Code" oftype CountryCodeAlpha3,
             "GDP per Capita" oftype GDP
@@ -74,17 +82,13 @@ pipeline CountryStatsPipeline {
         BIS_Length
     ];
 }
-   constraint BIS_Valid oftype RegexConstraint {
+    constraint BIS_Valid oftype RegexConstraint {
     regex: /^0(\.\d+)?|1(\.0+)?$/;
 }
     constraint BIS_Length oftype LengthConstraint {
     minLength: 1;
 }
-// constraint NoZero oftype DenylistConstraint {
-//     denylist: [
-//         "0"
-//     ];
-// }
+
 
     valuetype GDP oftype text {
     constraints: [
