@@ -4,9 +4,17 @@ pipeline CountryStatsPipeline {
         -> CountryStatsXLXSInterpreter
         -> CountryStatsSheetPicker
         -> CountryStatsDataSelector
-    // -> CountryStatsNameHeaderWriter
+        -> CountryStatsColumnDeleter
         -> CountryStatsCellsTableInterpreter
         -> CountryStatsCellsLoader;
+
+    CountryStatsXLXSInterpreter
+        -> SecondCountryStatsSheetPicker
+        -> SecondCountryStatsDataSelector
+        -> SecondCountryStatsColumnDeleter
+        -> SecondCountryStatsCellsTableInterpreter
+        -> SecondCountryStatsCellsLoader;
+
 
 
     block CountryStatsExtractor oftype HttpExtractor {
@@ -23,28 +31,68 @@ pipeline CountryStatsPipeline {
         select: range P2:S45;
     }
 
-    // block CountryStatsNameHeaderWriter oftype CellWriter {
-    //     at: range A1:A4;
-    //     write: [
-    //         "Country Code",
-    //         "Economy",
-    //         "GDP per Capita",
-    //         "Bound Issuance Share"
-    //     ];
-    // }
+
+    block CountryStatsColumnDeleter oftype ColumnDeleter {
+        delete: [ column B, column C
+        ];
+    }
 
     block CountryStatsCellsTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
             "Country Code" oftype text,
-            "Economy" oftype text,
-            "GDP per Capita" oftype decimal,
             "Bound Issuance Share" oftype decimal
         ];
     }
 
     block CountryStatsCellsLoader oftype SQLiteLoader {
-        table: "Country Stats Cells";
+        table: "bondIssuance";
+        file: "./country-stats.sqlite";
+    }
+
+    block SecondCountryStatsSheetPicker oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    block SecondCountryStatsDataSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    block SecondCountryStatsColumnDeleter oftype ColumnDeleter {
+        delete: [ column B, column D
+        ];
+    }
+
+    block SecondCountryStatsCellsTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Country Code" oftype text,
+            "GDP per Capita" oftype decimal
+        ];
+    }
+
+    block SecondCountryStatsCellsLoader oftype SQLiteLoader {
+        table: "gdpPerCapita";
         file: "./country-stats.sqlite";
     }
 } 
+
+valuetype TreesSelected oftype text {
+    constraints: [
+        OnlyVogelsang
+    ];
+}
+
+valuetype IdsSelected oftype text {
+    constraints: [
+        validRegex
+    ];
+}
+
+// The user defined valueTypes are defined and can be used as column type in TableInterpreter
+// But the valueTypes still need to have constraints
+
+constraint OnlyVogelsang on text: value matches /^Vogelsang*/;
+constraint validRegex oftype RegexConstraint {
+    regex: /^\d{1,3}\.\d+,\s*\d{1,3}\.\d+$/;
+}
