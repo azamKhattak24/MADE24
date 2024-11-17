@@ -78,29 +78,19 @@ pipeline CountryStatsPipeline {
 } 
     valuetype BIS oftype decimal {
     constraints: [
-        BIS_Valid,
-        BIS_Length
+        BIS_Valid
     ];
 }
     constraint BIS_Valid oftype RangeConstraint {
     lowerBound: 0;
     upperBound: 1;
 }
-    constraint BIS_Length oftype LengthConstraint {
-    minLength: 1;
-}
 
-
-    valuetype GDP oftype text {
+    valuetype GDP oftype decimal {
     constraints: [
-        GDP_Valid,
-        GDP_Length
+        GDP_Valid
     ];
 }
     constraint GDP_Valid oftype RangeConstraint {
     lowerBound: 0;
-}
-
-    constraint GDP_Length oftype LengthConstraint {
-    minLength: 1;
 }
