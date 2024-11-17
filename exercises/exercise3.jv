@@ -1,0 +1,50 @@
+pipeline CountryStatsPipeline {
+
+    CountryStatsExtractor
+        -> CountryStatsXLXSInterpreter
+        -> CountryStatsSheetPicker
+        -> CountryStatsDataSelector
+    // -> CountryStatsNameHeaderWriter
+        -> CountryStatsCellsTableInterpreter
+        -> CountryStatsCellsLoader;
+
+
+    block CountryStatsExtractor oftype HttpExtractor {
+        url: "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+
+    block CountryStatsXLXSInterpreter oftype XLSXInterpreter { }
+
+    block CountryStatsSheetPicker oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    block CountryStatsDataSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    // block CountryStatsNameHeaderWriter oftype CellWriter {
+    //     at: range A1:A4;
+    //     write: [
+    //         "Country Code",
+    //         "Economy",
+    //         "GDP per Capita",
+    //         "Bound Issuance Share"
+    //     ];
+    // }
+
+    block CountryStatsCellsTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Country Code" oftype text,
+            "Economy" oftype text,
+            "GDP per Capita" oftype decimal,
+            "Bound Issuance Share" oftype decimal
+        ];
+    }
+
+    block CountryStatsCellsLoader oftype SQLiteLoader {
+        table: "Country Stats Cells";
+        file: "./country-stats.sqlite";
+    }
+} 
