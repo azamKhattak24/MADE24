@@ -79,7 +79,8 @@ pipeline CountryStatsPipeline {
     valuetype BIS oftype text {
     constraints: [
         BIS_Valid,
-        BIS_Length
+        BIS_Length,
+        NoZero
     ];
 }
     constraint BIS_Valid oftype RegexConstraint {
@@ -87,6 +88,11 @@ pipeline CountryStatsPipeline {
 }
     constraint BIS_Length oftype LengthConstraint {
     minLength: 1;
+}
+    constraint NoZero oftype DenylistConstraint {
+    denylist: [
+        "0"
+    ];
 }
 
     valuetype GDP oftype text {
