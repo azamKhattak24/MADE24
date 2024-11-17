@@ -76,14 +76,15 @@ pipeline CountryStatsPipeline {
         file: "./country-stats.sqlite";
     }
 } 
-    valuetype BIS oftype text {
+    valuetype BIS oftype decimal {
     constraints: [
         BIS_Valid,
         BIS_Length
     ];
 }
-    constraint BIS_Valid oftype RegexConstraint {
-    regex: /^0(\.\d+)?|1(\.0+)?$/;
+    constraint BIS_Valid oftype RangeConstraint {
+    lowerBound: 0;
+    upperBound: 1;
 }
     constraint BIS_Length oftype LengthConstraint {
     minLength: 1;
@@ -96,8 +97,8 @@ pipeline CountryStatsPipeline {
         GDP_Length
     ];
 }
-    constraint GDP_Valid oftype RegexConstraint {
-    regex: /^(?:0|[1-9]\d*)(\.\d+)?$/;
+    constraint GDP_Valid oftype RangeConstraint {
+    lowerBound: 0;
 }
 
     constraint GDP_Length oftype LengthConstraint {
