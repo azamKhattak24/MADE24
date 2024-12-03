@@ -8,10 +8,10 @@ pipeline BatteryTempPipeline {
         -> BatteryTempCellRangeSelector
         -> BatteryTempColumnDeleter
         -> BatteryTempCellWriter
-        ->BatteryTempTableInterpreter
-        ->TemperatureTransformer
-        ->TemperatureBatteryTransformer
-        ->BatteryTempCellsLoader;
+        -> BatteryTempTableInterpreter
+        -> TemperatureTransformer
+        -> TemperatureBatteryTransformer
+        -> BatteryTempCellsLoader;
 
 
     block BatteryTempFileExtractor oftype HttpExtractor {
@@ -56,7 +56,7 @@ pipeline BatteryTempPipeline {
     block BatteryTempTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
-            "id" oftype Id,
+            "id" oftype valid_ID,
             "producer" oftype text,
             "model" oftype text,
             "month" oftype integer,
@@ -93,13 +93,13 @@ pipeline BatteryTempPipeline {
     }
 }
 
-constraint IdRangeConstraint oftype RangeConstraint {
+constraint Id_RangeConstraint oftype RangeConstraint {
     lowerBound: 0;
 }
 
-    valuetype Id oftype integer {
+    valuetype valid_ID oftype integer {
     constraints: [
-        IdRangeConstraint,
+        Id_RangeConstraint,
     ];
 }
 
