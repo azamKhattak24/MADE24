@@ -3,7 +3,7 @@
 #pip install -r requirements.txt
 #if python3 automated_testing.py ;
 echo ">>> installing required packages..."
-pip install -r ./project/requirements.txt
+pip3  install -r ./requirements.txt
 echo ">>> running the tests ..."
 if python3 ./automated_test.py ; then 
 echo ">>> tests ran..."
