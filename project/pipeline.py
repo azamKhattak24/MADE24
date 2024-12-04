@@ -104,7 +104,7 @@ def filter_rows_with_brazil(df, column_name1, column_name2, years):
     """
     Filter a DataFrame to keep only rows where the specified column contains "Brazil"
     The dataset has data around the world but we are only focusing on Brazil.
-    Also the wildfire and emission data is from 2002 - 2023 but the deforestration data is only
+    Also the wildfire and emission data is from 2002 - 2023 but the deforestation data is only
     from 2004 - 2019. Hence we drop the data for missing years from wildfire and emission datasets.
 
     Args:
@@ -139,43 +139,43 @@ def create_database(db_dir, db_name):
         os.makedirs(db_dir)
     return db_path
 
-def transform_deforestration_data(df):
+def transform_deforestation_data(df):
     
     """
-    Transforms deforestration data in a pandas DataFrame 
+    Transforms deforestation data in a pandas DataFrame 
 
     This function performs operations such as:
-    1. Drop the uncessary columns.
+    1. Drop the unnecessary columns.
     2. Drops the zero values from the rows with specified columns.
     3. Renames columns for consistency and clarity
     
     Args:
-        df : Path to the CSV file containing deforestration data.
+        df : Path to the CSV file containing deforestation data.
 
     Returns:
-        pd.DataFrame: Transformed deforestration DataFrame.
+        pd.DataFrame: Transformed deforestation DataFrame.
     """
-    deforestration_columns_to_drop = ['AC', 'AM', 'AP', 'MA', 'MT', 'PA', 'RO', 'RR', 'TO']
-    df = drop_irrelevant_columns(df, deforestration_columns_to_drop).copy()
+    deforestation_columns_to_drop = ['AC', 'AM', 'AP', 'MA', 'MT', 'PA', 'RO', 'RR', 'TO']
+    df = drop_irrelevant_columns(df, deforestation_columns_to_drop).copy()
     
     columns_with_zeros = ["AMZ LEGAL"]
     df = drop_rows_with_zeros(df, columns_with_zeros).copy()
     
-    deforestration_columns_rename = {'Ano/Estados': 'Year',
-                               'AMZ LEGAL':'Deforested Area'}
-    df = rename_columns(df, deforestration_columns_rename).copy()
+    deforestation_columns_rename = {'Ano/Estados': 'Year',
+                               'AMZ LEGAL':'Deforested_Area'}
+    df = rename_columns(df, deforestation_columns_rename).copy()
     
-    return df.reindex(columns=['Year','Deforested Area'])
+    return df.reindex(columns=['Year','Deforested_Area'])
 
 def transform_wildfire_data(df):
     """
     Transforms Wildfire burned area data in a pandas DataFrame 
 
     This function performs operations such as:
-    1. Drop the uncessary columns.
+    1. Drop the unnecessary columns.
     2. Drops the zero values from the rows with specified columns.
     3. Drops the data (rows) that are not related to Brazil 
-    4. Drops the data (rows) from specfied years.
+    4. Drops the data (rows) from specified years.
     5. Renames columns for consistency and clarity
     6. Aggregating (sum) monthly data to make it yearly data. 
     
@@ -212,10 +212,10 @@ def transform_emissions_data(df):
     Transforms Emissions data in a pandas DataFrame 
 
     This function performs operations such as:
-    1. Drop the uncessary columns.
+    1. Drop the unnecessary columns.
     2. Drops the zero values from the rows with specified columns.
     3. Drops the data (rows) that are not related to Brazil 
-    4. Drops the data (rows) from specfied years.
+    4. Drops the data (rows) from specified years.
     5. Renames columns for consistency and clarity
     6. Aggregating (sum) monthly data to make it yearly data. 
     
@@ -261,11 +261,11 @@ def main():
 #   Define Kaggle credentials to be found in kaggle.JSON
     username = "azamkhattak"
     key = "3932ac8e3dca141cad0d6841bd395cc8"
-#     kaggle_extract_Data(username, key)
-    deforestration_df = kaggle_extract_Data(username, key)
+#   Kaggle_extract_Data(username, key)
+    deforestation_df = kaggle_extract_Data(username, key)
     
 #   URLs for wildfire and emissions data files to download
-#   The URL for deforestration data is set above in the function already
+#   The URL for deforestation data is set above in the function already
     wildfire_url = "https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/MCD64A1_burned_area_full_dataset_2002-2023.zip"
     emissions_url = "https://effis-gwis-cms.s3.eu-west-1.amazonaws.com/apps/country.profile/emission_gfed_full_2002_2023.zip"
     
@@ -274,38 +274,36 @@ def main():
     emissions_files = download_and_extract_in_memory(emissions_url)
     
 #   Specify file paths for the CSV files within the extracted wildfire and emissions data
-#   The path for deforestration data is set above in the function already
+#   The path for deforestation data is set above in the function already
     wildfire_file_like = wildfire_files['MCD64A1_burned_area_full_dataset_2002-2023.csv']
     emissions_file_like = emissions_files['emission_gfed_full_2002_2023.csv']
     
     wildfire_df = load_and_clean_data(wildfire_file_like)
     emissions_df = load_and_clean_data(emissions_file_like)
     
-#   Transform the deforestration, wildfire and emissions data
+#   Transform the deforestation, wildfire and emissions data
     wildfire_df = transform_wildfire_data(wildfire_df).copy()
     emissions_df = transform_emissions_data(emissions_df).copy()
-    deforestration_df = transform_deforestration_data(deforestration_df).copy()
+    deforestation_df = transform_deforestation_data(deforestation_df).copy()
     
 #   Merge the wildfire and emission datasets
-#   Merge the intermediate df with deforestration_df to make the final df  
+#   Merge the intermediate df with deforestation_df to make the final df  
     merged_df1 = pd.merge(wildfire_df, emissions_df, how='inner')
-    merged_df2 = pd.merge(merged_df1, deforestration_df, how='inner')
+    merged_df2 = pd.merge(merged_df1, deforestation_df, how='inner')
     print(merged_df2.head())
 
 #   SQLite database path
     db_dir = 'data'
-    db_name = 'brazil_amazon_deforestration_and_wildfire_and_emission_data'
+    db_name = 'brazil_amazon_deforestation_and_wildfire_and_emission_data'
     db_path = create_database(db_dir, db_name)
     engine = create_engine(f'sqlite:///{db_path}')
     
 #   Save the processed data to the database
     wildfire_df.to_sql('wildfire_burned_area_data', engine, index=False, if_exists='replace')
     emissions_df.to_sql('wildfire_emissions_data', engine, index=False, if_exists='replace')
-    deforestration_df.to_sql('deforestration_data', engine, index=False, if_exists='replace')
+    deforestation_df.to_sql('deforestation_data', engine, index=False, if_exists='replace')
     merged_df2.to_sql('amazon_merged_data', engine, index=False, if_exists='replace')
     
-    print("I am finished")
-
 if __name__ == "__main__":
     main()
 
