@@ -303,6 +303,7 @@ def main():
     emissions_df.to_sql('wildfire_emissions_data', engine, index=False, if_exists='replace')
     deforestation_df.to_sql('deforestation_data', engine, index=False, if_exists='replace')
     merged_df2.to_sql('amazon_merged_data', engine, index=False, if_exists='replace')
+    #checking workflow
     
 if __name__ == "__main__":
     main()
