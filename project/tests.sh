@@ -5,7 +5,8 @@
 # echo ">>> installing required packages..."
 # pip3  install -r ./project/requirements.txt
 echo ">>> running the tests ..."
-if python3 ./project/automated_test.py ; then 
+cd ./project
+if python3 ./automated_test.py ; then 
 echo ">>> tests ran..."
 else 
 echo ">>> tests failed..."
