@@ -6,8 +6,5 @@
 # pip3  install -r ./project/requirements.txt
 echo ">>> running the tests ..."
 cd ./project
-if python3 ./automated_test.py ; then 
+pytest automated_test.py -v ;
 echo ">>> tests ran..."
-else 
-echo ">>> tests failed..."
-fi
