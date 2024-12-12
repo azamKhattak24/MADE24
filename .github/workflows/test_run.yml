@@ -22,8 +22,7 @@ jobs:
           python-version: 3.12
 
       - name: Install dependencies
-        run: |
-          pip3  install -r ./project/requirements.txt
+        run: pip3  install -r ./project/requirements.txt
 
       - name: Make the script files executable
         run: chmod +x -R ./project/tests.sh
