@@ -23,8 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: pip3  install -r ./project/requirements.txt
-      #check new CI
 
+      # changing dir
       - name: Cd into project
         run: cd ./project
 
