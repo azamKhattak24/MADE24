@@ -21,15 +21,7 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependencies
-        run: pip3  install -r ./project/requirements.txt
-      #check new CI
-
-      - name: Make the script files executable
-        run: chmod +x -R ./project/tests.sh
-
-      - name: Cd into project
-        run: cd ./project
-
-      - name: Run Tests
-        run: ./tests.sh
+      - name: Install dependencies and run tests
+      run: |
+        chmod +x -R ./project 
+        ./project/tests.sh

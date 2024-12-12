@@ -5,6 +5,13 @@
 # echo ">>> installing required packages..."
 # pip3  install -r ./project/requirements.txt
 echo ">>> running the tests ..."
-pytest automated_test.py -v ;
-echo ">>> tests ran..."
+export PYTHONPATH=$(pwd)/project
+echo "PYTHONPATH set to $PYTHONPATH"
+
+echo "Installing required Python libraries..."
+pip install --no-cache-dir -r ./project/requirements.txt
+
+
+echo "Running the tests..."
+pytest ./project/automated_test.py -v
 
