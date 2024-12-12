@@ -7,3 +7,4 @@
 echo ">>> running the tests ..."
 pytest automated_test.py -v ;
 echo ">>> tests ran..."
+
