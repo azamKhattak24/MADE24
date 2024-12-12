@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: pip3  install -r ./project/requirements.txt
-
+      #check new CI
       - name: Make the script files executable
         run: chmod +x -R ./project/tests.sh
 
