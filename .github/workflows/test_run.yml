@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Install dependencies
+        run: |
+          pip3  install -r ./project/requirements.txt
+
       - name: Make the script files executable
         run: chmod +x -R ./project/tests.sh
 
