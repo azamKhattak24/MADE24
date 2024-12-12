@@ -14,4 +14,3 @@ pip install --no-cache-dir -r ./project/requirements.txt
 
 echo "Running the tests..."
 pytest ./project/automated_test.py -v
-

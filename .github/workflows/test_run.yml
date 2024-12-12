@@ -13,15 +13,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       #install python
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: "3.9"
 
       - name: Install dependencies and run tests
-      run: |
-        chmod +x -R ./project 
-        ./project/tests.sh
+        run: |
+          chmod +x -R ./project 
+          ./project/tests.sh
