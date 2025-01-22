@@ -57,9 +57,20 @@ The dataset provides monthly emissions(Tons) data from 2002 to 2023, categorized
 3. Data Loading, Cleaning and Preprocessing [#3]
 4. Automate the Data Pipeline (ETL) [#4]
 5. Testing and Validation [#5]
+6. Create Visualization [#6]
+7. Correlation Analysis [#7]
+8. Analysis Report [#8]
+9. Presentation [#9]
+10. Record Video Presentation
 
 [#1]: https://github.com/azamKhattak24/MADE24/issues/1#issue-2650388072
 [#2]: https://github.com/azamKhattak24/MADE24/issues/2#issue-2650389806
 [#3]: https://github.com/azamKhattak24/MADE24/issues/3#issue-2658580619
 [#4]: https://github.com/azamKhattak24/MADE24/issues/4#issue-2658593120
 [#5]: https://github.com/azamKhattak24/MADE24/issues/5
+[#6]: https://github.com/azamKhattak24/MADE24/issues/6
+[#7]: https://github.com/azamKhattak24/MADE24/issues/7
+[#8]: https://github.com/azamKhattak24/MADE24/issues/8
+[#9]: https://github.com/azamKhattak24/MADE24/issues/9
+[#10]: https://github.com/azamKhattak24/MADE24/issues/10
+
