@@ -1,7 +1,7 @@
 
 # Amazon Deforestation, Forest Fires, and CO₂ Emissions in Brazil
 
-<img src="pictures\\Project_Image.webp" width="800" height="466">
+<img src="project\\pictures\\Project_Image.webp" width="800" height="466">
 
 ## Project Objective
 
